@@ -104,3 +104,20 @@ const hasFalsy = (arr) => arr.some((el) => !el)
 
 const decrementEach = map(decrement)
 const incrementEach = map(increment)
+
+const escapeHTML = (unsafe) => {
+  return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+const linkify = (text) => {
+  const urlPattern = /\b(?:https?):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
+  const emailAddressPattern = /(([a-zA-Z0-9_\-\.]+)@[a-zA-Z_]+?(?:\.[a-zA-Z]{2,6}))+/gim;
+  return text
+    .replace(urlPattern, '<a target="_blank" href="$&">$&</a>')
+    .replace(emailAddressPattern, '<a target="_blank" href="mailto:$1">$1</a>');
+}
